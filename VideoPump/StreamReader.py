@@ -2,7 +2,7 @@ import cv2
 import threading
 import sys
 from ultralytics import YOLO
-model = YOLO('D:/yolov8/ultralytics/yolov8-p2-large/train/weights/best.pt')
+model = YOLO('D:/yolov8/model_data/best.onnx')
 # model = YOLO('D:/yolov8/ultralytics/yolov8n.pt')
 print("model loaded complete")
 class RTSCapture(cv2.VideoCapture):
@@ -60,15 +60,14 @@ if __name__ == '__main__':
         print("reading")
         ok, frame = rtscap.read_latest_frame()
         print(type(frame))
-        results = model.predict(source=frame,imgsz=640)
-        frame = results[0].plot()
-        if cv2.waitKey(100) & 0xFF == ord('q'):
+        
+        if cv2.waitKey(30) & 0xFF == ord('q'): 
             break
         if not ok:
             continue
 
 
-        # inhere
+        # inhereq
         cv2.imshow("cam", frame)
 
 
